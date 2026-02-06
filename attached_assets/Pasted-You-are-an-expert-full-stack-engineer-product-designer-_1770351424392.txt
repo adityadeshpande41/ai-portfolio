@@ -1,0 +1,103 @@
+You are an expert full-stack engineer + product designer. Build me a production-grade personal portfolio website for “Aditya Deshpande” with a premium, modern design and unique interactive elements. I will run this on Replit, then later deploy. Output a complete repo with clear setup instructions.
+
+GOALS
+1) Make it feel like a top-tier AI/PM portfolio (beautiful + fast).
+2) Showcase my work experience, projects (with videos), education, publications.
+3) Add weekly writing: Blog posts + “Product Breakdowns” (PM-style).
+4) Add TWO signature AI features:
+   A) RAG-powered chatbot that can answer anything about my resume, work, projects, skills, publications, and blog posts, with citations linking to sources.
+   B) Voice AI agent: users can talk to it; it answers about me; also shows transcript + clickable citations/links.
+
+TECH REQUIREMENTS (use these defaults)
+- Frontend: Next.js 14 (App Router) + TypeScript
+- Styling: Tailwind CSS + shadcn/ui components + Framer Motion
+- Content: MDX for Blog + Product Breakdowns
+- Backend API routes in Next.js for chat + ingestion
+- Vector DB: start with local (SQLite-based) + embeddings (so it works in Replit). If possible, implement with:
+  - Embeddings: OpenAI (text-embedding-3-small) OR if no key, fall back to a local embedding model option (document how).
+  - Vector store: use a simple local store (SQLite + cosine similarity) or a lightweight library that works in Node.
+- LLM: OpenAI chat completion (document env vars)
+- Voice:
+  - Option 1 (preferred): Web Speech API for mic capture + browser TTS for playback, plus server-side LLM response.
+  - Option 2: If available, OpenAI Realtime / speech endpoints (only if easy). Keep it modular.
+
+ENV VARS
+- OPENAI_API_KEY
+- (optional) SITE_URL
+
+SITE PAGES / SECTIONS
+1) Home (hero, value prop, featured projects, key metrics, CTA)
+2) About (short bio + skills tags)
+3) Experience (timeline + impact bullets)
+4) Projects (cards with filters; each project has case-study page)
+   - Each project page: problem, solution, stack, architecture diagram placeholder, impact metrics, video embed section.
+5) Writing
+   - Blog (weekly posts)
+   - Product Breakdowns (weekly PM tear-downs) with a consistent template
+6) Publications
+7) Contact (social links + email + calendly placeholder)
+8) Resume (download link placeholder)
+
+DESIGN DIRECTION
+- Premium AI/startup feel: clean typography, subtle gradients, strong spacing, high contrast.
+- Add a unique cursor interaction:
+  - Implement a “bubble / gooey” cursor trail that subtly reacts to motion.
+  - Also add “magnetic hover” on buttons/cards.
+- Add micro-interactions: smooth page transitions, hover states, skeleton loaders.
+- Must be fast: Lighthouse-minded, minimal bloat.
+
+AI FEATURE 1: RAG CHATBOT
+- Floating chat widget on all pages (bottom-right).
+- Chat can answer questions about me. It must:
+  - Retrieve context from: a) /data/resume.md b) /data/projects/*.md c) /data/experience.md d) /content/blog/*.mdx e) /content/product-breakdowns/*.mdx f) /data/publications.md
+  - Chunk docs, embed, store in local vector DB.
+  - Provide citations: show title + link to source section/page used.
+  - Have “Suggested questions” chips.
+  - Have modes: Recruiter | Engineering | PM (affects tone/verbosity).
+- Include a simple admin/dev endpoint or script: `npm run ingest` to rebuild embeddings when content changes.
+
+AI FEATURE 2: VOICE AGENT
+- A dedicated “Talk to Aditya” page + small mic button inside chat widget.
+- Press-to-talk or toggle recording (simple).
+- Convert speech to text (Web Speech API acceptable).
+- Send transcript to the same RAG backend; return response.
+- Read response aloud (Web Speech API TTS acceptable).
+- Show transcript + citations + “copy answer” button.
+
+DATA / CONTENT
+- Include realistic placeholder content for:
+  - 6 projects (with stack tags, impact bullets, and a “video url” placeholder)
+  - 3 experience roles
+  - education
+  - 2 publications
+  - 3 blog posts
+  - 2 product breakdowns
+- Keep everything editable as markdown/MDX in folders.
+
+ARCHITECTURE
+- /app routes for pages
+- /components for UI
+- /lib/rag for ingestion, chunking, embedding, retrieval
+- /app/api/chat route for chat
+- /app/api/ingest route (protected by a simple dev token or only in dev)
+- Clear separation of concerns.
+
+SECURITY / QUALITY
+- Don’t expose OPENAI_API_KEY to client.
+- Rate limit chat endpoints lightly (basic in-memory limiter ok).
+- Add basic prompt injection defenses (only answer about Aditya; refuse unrelated).
+- Error handling + loading states.
+
+DELIVERABLES
+1) Full repo code
+2) README with:
+   - how to run
+   - env vars
+   - how ingestion works
+   - how to add new blog posts/product breakdowns
+   - how to deploy later
+
+IMPORTANT
+- Make it look excellent out of the box.
+- Prioritize working end-to-end in Replit.
+- Keep dependencies reasonable.
