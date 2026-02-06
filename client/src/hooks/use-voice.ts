@@ -113,7 +113,7 @@ export function useVoiceAgent() {
   // For now, we'll rely on the manual stop or the recognition.onend event to trigger submission logic
   // But standard behavior for non-continuous is it ends automatically.
   useEffect(() => {
-    if (!isListening && transcript) {
+    if (!isListening && transcript.trim()) {
        // This effect triggers when listening stops and we have text. 
        // We can auto-submit here.
        const userMsg = transcript;

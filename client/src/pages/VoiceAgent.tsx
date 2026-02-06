@@ -53,13 +53,13 @@ export default function VoiceAgent() {
           {isPending && (
             <span className="flex items-center gap-2 text-blue-400 font-medium">
               <LoaderDots />
-              Thinking...
+              RAG Search...
             </span>
           )}
           {isSpeaking && (
             <span className="flex items-center gap-2 text-green-400 font-medium">
               <Volume2 className="w-4 h-4" />
-              Speaking...
+              Explaining...
             </span>
           )}
         </div>
