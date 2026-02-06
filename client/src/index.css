@@ -62,8 +62,31 @@
   }
   
   .glass {
-    @apply bg-black/40 backdrop-blur-md border border-white/10;
+    @apply bg-black/40 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)];
   }
+
+  .bubbly {
+    @apply relative overflow-hidden;
+  }
+
+  .bubbly::before {
+    content: '';
+    @apply absolute -top-1/2 -left-1/2 w-[200%] h-[200%] bg-[radial-gradient(circle,rgba(255,255,255,0.05)_0%,transparent_50%)] pointer-events-none;
+    animation: bubble-float 20s infinite linear;
+  }
+
+  @keyframes bubble-float {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .gooey-filter {
+    filter: url('#gooey');
+  }
+}
+
+@layer base {
+  /* ... existing ... */
 }
 
 /* Hide default cursor on interactive elements to let our custom cursor take over */

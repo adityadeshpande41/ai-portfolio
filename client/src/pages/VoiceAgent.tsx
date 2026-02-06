@@ -9,35 +9,35 @@ export default function VoiceAgent() {
 
   return (
     <PageTransition>
-      <div className="flex flex-col items-center justify-center min-h-[60vh] max-w-2xl mx-auto text-center">
+      <div className="flex flex-col items-center justify-center min-h-[60vh] max-w-2xl mx-auto text-center py-12">
         <h1 className="text-4xl md:text-5xl font-display font-bold mb-4 text-white">Talk to Aditya</h1>
         <p className="text-zinc-400 mb-12">
-          Have a voice conversation with my AI twin. Ask about my background, philosophy, or favorite tech.
+          Have a voice conversation with my AI twin. Ask about my background, projects, or philosophy.
         </p>
 
         {/* Microphone Button */}
-        <div className="relative mb-12">
+        <div className="relative mb-12 gooey-filter">
           {/* Ripple Effect */}
           {isListening && (
              <motion.div
                initial={{ opacity: 0.5, scale: 1 }}
-               animate={{ opacity: 0, scale: 2 }}
-               transition={{ repeat: Infinity, duration: 1.5, ease: "easeOut" }}
-               className="absolute inset-0 bg-blue-500/30 rounded-full"
+               animate={{ opacity: 0, scale: 2.5 }}
+               transition={{ repeat: Infinity, duration: 2, ease: "easeOut" }}
+               className="absolute inset-0 bg-blue-500/20 rounded-full"
              />
           )}
           
           <button
             onClick={isListening ? stopListening : startListening}
             className={cn(
-              "relative z-10 w-24 h-24 rounded-full flex items-center justify-center transition-all duration-300 shadow-2xl",
-              isListening ? "bg-red-500 hover:bg-red-600 shadow-red-500/20" : "bg-blue-600 hover:bg-blue-500 shadow-blue-500/20"
+              "relative z-10 w-28 h-28 rounded-full flex items-center justify-center transition-all duration-500 shadow-2xl hover:scale-105 active:scale-95",
+              isListening ? "bg-red-500 shadow-red-500/40" : "bg-blue-600 shadow-blue-500/40"
             )}
           >
             {isListening ? (
-              <MicOff className="w-10 h-10 text-white" />
+              <MicOff className="w-12 h-12 text-white" />
             ) : (
-              <Mic className="w-10 h-10 text-white" />
+              <Mic className="w-12 h-12 text-white" />
             )}
           </button>
         </div>
