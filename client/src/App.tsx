@@ -19,7 +19,6 @@ import VoiceAgent from "@/pages/VoiceAgent";
 import { Navigation } from "@/components/Navigation";
 import { Cursor } from "@/components/Cursor";
 import { ChatWidget } from "@/components/ChatWidget";
-import { ThemeProvider } from "@/components/theme-provider";
 
 function Router() {
   const [location] = useLocation();
@@ -45,17 +44,15 @@ function Router() {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider defaultTheme="dark" storageKey="portfolio-theme">
-        <TooltipProvider>
-          <div className="min-h-screen bg-background text-foreground selection:bg-primary/30">
-            <Cursor />
-            <Navigation />
-            <Router />
-            <ChatWidget />
-            <Toaster />
-          </div>
-        </TooltipProvider>
-      </ThemeProvider>
+      <TooltipProvider>
+        <div className="min-h-screen bg-black text-white selection:bg-blue-500/30">
+          <Cursor />
+          <Navigation />
+          <Router />
+          <ChatWidget />
+          <Toaster />
+        </div>
+      </TooltipProvider>
     </QueryClientProvider>
   );
 }
