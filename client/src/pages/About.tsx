@@ -20,7 +20,7 @@ export default function About() {
               Currently, I'm focused on building <span className="text-white">generative AI agents</span> that can interact naturally with humans. I believe the future of software lies in interfaces that disappear, leaving only the intent and the outcome.
             </p>
             <p>
-              When I'm not coding, I'm likely reading about cognitive science, playing chess, or exploring generative art.
+              When I'm not coding, I'm likely reading about cognitive science, playing chess, or exploring generative art. I'm also an avid hiker and photographer.
             </p>
           </div>
 
@@ -63,7 +63,46 @@ export default function About() {
           </div>
         </div>
       </div>
+
+      {/* Hobbies Section */}
+      <div className="mt-32">
+        <h2 className="text-3xl md:text-5xl font-display font-bold mb-12 text-white">Life Beyond Code</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <HobbyCard 
+            title="Hiking & Exploration" 
+            description="Finding clarity in the mountains and fresh air." 
+            image="/images/hobby1.jpg"
+          />
+          <HobbyCard 
+            title="Photography" 
+            description="Capturing the interplay of light and shadow." 
+            image="/images/hobby2.jpg"
+          />
+          <HobbyCard 
+            title="Minimalist Travel" 
+            description="Discovering new perspectives across the globe." 
+            image="/images/hobby3.jpg"
+          />
+        </div>
+      </div>
     </PageTransition>
+  );
+}
+
+function HobbyCard({ title, description, image }: { title: string, description: string, image: string }) {
+  return (
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="group relative rounded-2xl overflow-hidden border border-white/5 aspect-[4/5]"
+    >
+      <img src={image} alt={title} className="object-cover w-full h-full grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-110" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent p-8 flex flex-col justify-end">
+        <h3 className="text-xl font-bold text-white mb-2">{title}</h3>
+        <p className="text-sm text-zinc-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300">{description}</p>
+      </div>
+    </motion.div>
   );
 }
 
