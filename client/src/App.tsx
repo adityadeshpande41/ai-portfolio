@@ -12,6 +12,7 @@ import Experience from "@/pages/Experience";
 import Projects from "@/pages/Projects";
 import Writing from "@/pages/Writing";
 import Contact from "@/pages/Contact";
+import Chat from "@/pages/Chat";
 import VoiceAgent from "@/pages/VoiceAgent";
 
 import { Navigation } from "@/components/Navigation";
@@ -30,6 +31,7 @@ function Router() {
         <Route path="/projects" component={Projects} />
         <Route path="/writing" component={Writing} />
         <Route path="/contact" component={Contact} />
+        <Route path="/chat" component={Chat} />
         <Route path="/voice" component={VoiceAgent} />
         <Route component={NotFound} />
       </Switch>
