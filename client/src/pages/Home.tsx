@@ -1,7 +1,34 @@
 import { PageTransition } from "@/components/PageTransition";
 import { ArrowRight, Github, Linkedin, Twitter } from "lucide-react";
 import { Link } from "wouter";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { useEffect, useState } from "react";
+
+function BubblyText({ children }: { children: string }) {
+  const words = children.split(" ");
+  return (
+    <div className="flex flex-wrap gap-x-[0.3em]">
+      {words.map((word, i) => (
+        <span key={i} className="inline-block overflow-hidden py-1">
+          {word.split("").map((char, j) => (
+            <motion.span
+              key={j}
+              className="inline-block hover:text-blue-400 transition-colors"
+              whileHover={{ 
+                y: -15, 
+                scale: 1.4,
+                rotate: Math.random() * 20 - 10,
+                transition: { type: "spring", stiffness: 400, damping: 10 }
+              }}
+            >
+              {char}
+            </motion.span>
+          ))}
+        </span>
+      ))}
+    </div>
+  );
+}
 
 export default function Home() {
   return (
@@ -18,13 +45,15 @@ export default function Home() {
           </span>
         </motion.div>
 
-        <h1 className="text-5xl md:text-8xl font-display font-bold leading-[1.1] mb-8 bg-clip-text text-transparent bg-gradient-to-b from-white to-white/50">
-          Building intelligence <br /> into the web.
-        </h1>
+        <div className="text-5xl md:text-8xl font-display font-bold leading-[1.1] mb-8 bg-clip-text text-transparent bg-gradient-to-b from-white to-white/50">
+          <BubblyText>Building intelligence into the web.</BubblyText>
+        </div>
 
-        <p className="text-xl md:text-2xl text-zinc-400 max-w-2xl mb-12 leading-relaxed">
-          I'm Aditya, a Full Stack Engineer specializing in <span className="text-white">AI-driven applications</span>, beautiful interfaces, and scalable systems.
-        </p>
+        <div className="text-xl md:text-2xl text-zinc-400 max-w-2xl mb-12 leading-relaxed">
+          <p>
+            I'm Aditya, a Full Stack Engineer specializing in <span className="text-white">AI-driven applications</span>, beautiful interfaces, and scalable systems.
+          </p>
+        </div>
 
         <div className="flex flex-wrap gap-4 mb-16">
           <Link href="/projects">

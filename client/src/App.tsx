@@ -13,6 +13,7 @@ import Projects from "@/pages/Projects";
 import Writing from "@/pages/Writing";
 import Contact from "@/pages/Contact";
 import Chat from "@/pages/Chat";
+import ProductTeardowns from "@/pages/ProductTeardowns";
 import VoiceAgent from "@/pages/VoiceAgent";
 
 import { Navigation } from "@/components/Navigation";
@@ -32,6 +33,7 @@ function Router() {
         <Route path="/writing" component={Writing} />
         <Route path="/contact" component={Contact} />
         <Route path="/chat" component={Chat} />
+        <Route path="/teardowns" component={ProductTeardowns} />
         <Route path="/voice" component={VoiceAgent} />
         <Route component={NotFound} />
       </Switch>
