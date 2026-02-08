@@ -1,15 +1,12 @@
 import express, { type Express } from "express";
 import fs from "fs";
 import path from "path";
-import { fileURLToPath } from "url";
 
 export function serveStatic(app: Express) {
-  // Handle both ESM and CommonJS
-  const __dirname = typeof import.meta !== 'undefined' && import.meta.url
-    ? path.dirname(fileURLToPath(import.meta.url))
-    : (typeof __dirname !== 'undefined' ? __dirname : process.cwd());
-    
-  const distPath = path.resolve(__dirname, "public");
+  // In production, the bundled file is at dist/index.cjs
+  // and the public folder is at dist/public
+  const distPath = path.join(process.cwd(), "dist", "public");
+  
   if (!fs.existsSync(distPath)) {
     throw new Error(
       `Could not find the build directory: ${distPath}, make sure to build the client first`,
@@ -20,6 +17,6 @@ export function serveStatic(app: Express) {
 
   // fall through to index.html if the file doesn't exist
   app.use("*", (_req, res) => {
-    res.sendFile(path.resolve(distPath, "index.html"));
+    res.sendFile(path.join(distPath, "index.html"));
   });
 }
