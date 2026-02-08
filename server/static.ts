@@ -7,6 +7,8 @@ export function serveStatic(app: Express) {
   // and the public folder is at dist/public
   const distPath = path.join(process.cwd(), "dist", "public");
   
+  console.log("Serving static files from:", distPath);
+  
   if (!fs.existsSync(distPath)) {
     throw new Error(
       `Could not find the build directory: ${distPath}, make sure to build the client first`,
