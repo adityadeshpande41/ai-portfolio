@@ -1,14 +1,11 @@
 import { drizzle } from "drizzle-orm/better-sqlite3";
 import Database from "better-sqlite3";
 import * as schema from "@shared/schema";
-import { fileURLToPath } from "url";
-import { dirname, join } from "path";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+import { join } from "path";
 
 // SQLite database file location
-const dbPath = process.env.DATABASE_PATH || join(__dirname, "../data/portfolio.db");
+// In production, use process.cwd() which points to the project root
+const dbPath = process.env.DATABASE_PATH || join(process.cwd(), "data/portfolio.db");
 
 // Create database connection
 const sqlite = new Database(dbPath);
