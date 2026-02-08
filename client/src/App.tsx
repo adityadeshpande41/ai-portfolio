@@ -15,6 +15,9 @@ import Contact from "@/pages/Contact";
 import Chat from "@/pages/Chat";
 import ProductTeardowns from "@/pages/ProductTeardowns";
 import VoiceAgent from "@/pages/VoiceAgent";
+import Travel from "@/pages/Travel";
+import Photography from "@/pages/Photography";
+import Hiking from "@/pages/Hiking";
 
 import { Navigation } from "@/components/Navigation";
 import { Cursor } from "@/components/Cursor";
@@ -35,6 +38,9 @@ function Router() {
         <Route path="/chat" component={Chat} />
         <Route path="/teardowns" component={ProductTeardowns} />
         <Route path="/voice" component={VoiceAgent} />
+        <Route path="/travel" component={Travel} />
+        <Route path="/photography" component={Photography} />
+        <Route path="/hiking" component={Hiking} />
         <Route component={NotFound} />
       </Switch>
     </AnimatePresence>

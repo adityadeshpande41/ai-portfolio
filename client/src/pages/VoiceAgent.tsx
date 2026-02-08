@@ -1,11 +1,11 @@
 import { PageTransition } from "@/components/PageTransition";
 import { useVoiceAgent } from "@/hooks/use-voice";
 import { motion, AnimatePresence } from "framer-motion";
-import { Mic, MicOff, Volume2 } from "lucide-react";
+import { Mic, MicOff, Volume2, VolumeX } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export default function VoiceAgent() {
-  const { isListening, transcript, messages, isSpeaking, startListening, stopListening, isPending } = useVoiceAgent();
+  const { isListening, transcript, messages, isSpeaking, startListening, stopListening, stopSpeaking, isPending } = useVoiceAgent();
 
   return (
     <PageTransition>
@@ -16,7 +16,7 @@ export default function VoiceAgent() {
         </p>
 
         {/* Microphone Button */}
-        <div className="relative mb-12 gooey-filter">
+        <div className="relative mb-12 gooey-filter flex items-center gap-6">
           {/* Ripple Effect */}
           {isListening && (
              <motion.div
@@ -40,6 +40,20 @@ export default function VoiceAgent() {
               <Mic className="w-12 h-12 text-white" />
             )}
           </button>
+
+          {/* Stop Speaking Button */}
+          {isSpeaking && (
+            <motion.button
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              onClick={stopSpeaking}
+              className="relative z-10 w-20 h-20 rounded-full flex items-center justify-center transition-all duration-300 shadow-xl hover:scale-105 active:scale-95 bg-orange-500 shadow-orange-500/40"
+              title="Stop speaking"
+            >
+              <VolumeX className="w-8 h-8 text-white" />
+            </motion.button>
+          )}
         </div>
 
         {/* Status Indicator */}
@@ -53,13 +67,18 @@ export default function VoiceAgent() {
           {isPending && (
             <span className="flex items-center gap-2 text-blue-400 font-medium">
               <LoaderDots />
-              RAG Search...
+              Thinking...
             </span>
           )}
           {isSpeaking && (
-            <span className="flex items-center gap-2 text-green-400 font-medium">
+            <span className="flex items-center gap-2 text-green-400 font-medium animate-pulse">
               <Volume2 className="w-4 h-4" />
-              Explaining...
+              Speaking...
+            </span>
+          )}
+          {!isListening && !isPending && !isSpeaking && messages.length > 0 && (
+            <span className="text-zinc-500 text-sm">
+              Tap mic to continue...
             </span>
           )}
         </div>

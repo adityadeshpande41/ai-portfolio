@@ -1,36 +1,37 @@
-import { pgTable, text, serial, integer, boolean, timestamp, jsonb } from "drizzle-orm/pg-core";
+import { sqliteTable, text, integer, real } from "drizzle-orm/sqlite-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
 // === TABLE DEFINITIONS ===
 
 // RAG Documents Store
-export const documents = pgTable("documents", {
-  id: serial("id").primaryKey(),
+export const documents = sqliteTable("documents", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
   source: text("source").notNull(), // e.g. "projects/project1.md"
   title: text("title").notNull(),
   content: text("content").notNull(), // The text chunk
   category: text("category").notNull(), // 'resume', 'project', 'blog', etc.
-  metadata: jsonb("metadata").$type<Record<string, any>>().default({}),
-  embedding: jsonb("embedding").$type<number[]>().notNull(), // 1536-dim vector stored as JSON array
-  createdAt: timestamp("created_at").defaultNow(),
+  metadata: text("metadata", { mode: "json" }).$type<Record<string, any>>().default({}),
+  embedding: text("embedding", { mode: "json" }).$type<number[]>().notNull(), // 1536-dim vector stored as JSON
+  createdAt: integer("created_at", { mode: "timestamp" }).$defaultFn(() => new Date()),
 });
 
 // Contact Form Submissions
-export const contacts = pgTable("contacts", {
-  id: serial("id").primaryKey(),
+export const contacts = sqliteTable("contacts", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
   name: text("name").notNull(),
   email: text("email").notNull(),
+  subject: text("subject").notNull(),
   message: text("message").notNull(),
-  createdAt: timestamp("created_at").defaultNow(),
+  createdAt: integer("created_at", { mode: "timestamp" }).$defaultFn(() => new Date()),
 });
 
 // Chat History (Optional persistence)
-export const messages = pgTable("messages", {
-  id: serial("id").primaryKey(),
+export const messages = sqliteTable("messages", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
   role: text("role").notNull(), // 'user' | 'assistant'
   content: text("content").notNull(),
-  createdAt: timestamp("created_at").defaultNow(),
+  createdAt: integer("created_at", { mode: "timestamp" }).$defaultFn(() => new Date()),
 });
 
 // === SCHEMAS ===

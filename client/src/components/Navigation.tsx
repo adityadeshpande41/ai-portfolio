@@ -21,7 +21,7 @@ export function Navigation() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <Link href="/">
           <span className="text-xl font-display font-bold text-white cursor-pointer tracking-tighter">
-            ADITYA<span className="text-zinc-500">.DEV</span>
+            ADITYA<span className="text-zinc-500">.AI</span>
           </span>
         </Link>
         

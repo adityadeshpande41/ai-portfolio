@@ -4,3 +4,21 @@ dist
 server/public
 vite.config.ts.*
 *.tar.gz
+.env
+
+# Local development files
+.local/
+.vscode/
+
+# Personal files (resumes, images)
+*.pdf
+*.HEIC
+*.heic
+Travel*.jpg
+IMG_*.jpg
+IMG_*.JPG
+
+# Note: We include the database file for deployment
+# data/*.db
+# data/*.db-shm
+# data/*.db-wal

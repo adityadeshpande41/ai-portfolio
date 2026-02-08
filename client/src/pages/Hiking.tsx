@@ -1,0 +1,62 @@
+import { PageTransition } from "@/components/PageTransition";
+import { motion } from "framer-motion";
+
+const hikingPhotos = [
+  {
+    id: 1,
+    image: "/images/E1.jpg",
+    title: "Mountain Peaks",
+    location: "Finding clarity in the heights"
+  },
+  {
+    id: 2,
+    image: "/images/E2.JPG",
+    title: "Trail Adventures",
+    location: "Exploring new paths"
+  },
+  {
+    id: 3,
+    image: "/images/E3.JPG",
+    title: "Nature's Beauty",
+    location: "Fresh air and open skies"
+  }
+];
+
+export default function Hiking() {
+  return (
+    <PageTransition>
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-16">
+          <h1 className="text-4xl md:text-6xl font-display font-bold mb-6 text-white">
+            Hiking & Exploration
+          </h1>
+          <p className="text-xl text-zinc-400 max-w-2xl mx-auto">
+            Finding clarity in the mountains and fresh air.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {hikingPhotos.map((photo, index) => (
+            <motion.div
+              key={photo.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1, duration: 0.5 }}
+              className="group relative rounded-3xl overflow-hidden border border-white/5 aspect-[4/5] hover:border-blue-500/30 transition-all"
+            >
+              <img 
+                src={photo.image} 
+                alt={photo.title}
+                className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent p-8 flex flex-col justify-end">
+                <h3 className="text-2xl font-bold text-white mb-2">{photo.title}</h3>
+                <p className="text-sm text-zinc-300">{photo.location}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </PageTransition>
+  );
+}

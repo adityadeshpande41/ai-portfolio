@@ -24,11 +24,73 @@ declare global {
 export function useVoiceAgent() {
   const [isListening, setIsListening] = useState(false);
   const [transcript, setTranscript] = useState("");
-  const [messages, setMessages] = useState<{role: 'user'|'assistant', content: string}[]>([]);
+  const [messages, setMessages] = useState<{role: 'user'|'assistant', content: string}[]>([
+    { role: 'assistant', content: "Hi! I'm Aditya's AI assistant. Ask me anything about my work, skills, or projects!" }
+  ]);
   const [isSpeaking, setIsSpeaking] = useState(false);
+  const [hasGreeted, setHasGreeted] = useState(false);
   
   const recognition = useRef<SpeechRecognition | null>(null);
+  const currentAudio = useRef<HTMLAudioElement | null>(null);
   const chatMutation = useChat();
+
+  const speak = useCallback(async (text: string) => {
+    try {
+      setIsSpeaking(true);
+      
+      // Stop any currently playing audio
+      if (currentAudio.current) {
+        currentAudio.current.pause();
+        currentAudio.current = null;
+      }
+      
+      // Call backend TTS endpoint
+      const response = await fetch("/api/voice/tts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ text }),
+      });
+
+      if (!response.ok) {
+        throw new Error("TTS request failed");
+      }
+
+      // Get audio blob and play it
+      const audioBlob = await response.blob();
+      const audioUrl = URL.createObjectURL(audioBlob);
+      const audio = new Audio(audioUrl);
+      currentAudio.current = audio;
+      
+      audio.onended = () => {
+        setIsSpeaking(false);
+        currentAudio.current = null;
+        URL.revokeObjectURL(audioUrl);
+      };
+      
+      audio.onerror = () => {
+        setIsSpeaking(false);
+        currentAudio.current = null;
+        URL.revokeObjectURL(audioUrl);
+      };
+      
+      await audio.play();
+    } catch (error) {
+      console.error("Speech synthesis error:", error);
+      setIsSpeaking(false);
+      currentAudio.current = null;
+    }
+  }, []);
+
+  // Auto-greet on first load - immediate
+  useEffect(() => {
+    if (!hasGreeted) {
+      setHasGreeted(true);
+      // Greet immediately without delay
+      speak("Hi! I'm Aditya's AI assistant. Ask me anything about my work, skills, or projects!");
+    }
+  }, [hasGreeted, speak]);
   
   // Initialize Speech Recognition
   useEffect(() => {
@@ -57,21 +119,19 @@ export function useVoiceAgent() {
     }
   }, []);
 
-  const speak = useCallback((text: string) => {
-    if ('speechSynthesis' in window) {
-      // Cancel existing speech
-      window.speechSynthesis.cancel();
-      
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.rate = 1.0;
-      utterance.pitch = 1.0;
-      utterance.volume = 1.0;
-      
-      utterance.onstart = () => setIsSpeaking(true);
-      utterance.onend = () => setIsSpeaking(false);
-      
-      window.speechSynthesis.speak(utterance);
+  const stopSpeaking = useCallback(() => {
+    // Stop OpenAI audio
+    if (currentAudio.current) {
+      currentAudio.current.pause();
+      currentAudio.current = null;
     }
+    
+    // Stop browser TTS as fallback
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+    }
+    
+    setIsSpeaking(false);
   }, []);
 
   const startListening = useCallback(() => {
@@ -144,6 +204,7 @@ export function useVoiceAgent() {
     isSpeaking,
     startListening,
     stopListening: () => recognition.current?.stop(),
+    stopSpeaking,
     isPending: chatMutation.isPending
   };
 }
