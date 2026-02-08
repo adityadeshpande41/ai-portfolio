@@ -18,7 +18,8 @@ export function serveStatic(app: Express) {
   app.use(express.static(distPath));
 
   // fall through to index.html if the file doesn't exist
-  app.get("*", (_req, res) => {
+  // Express 5 compatible catch-all route
+  app.use((_req, res) => {
     res.sendFile(path.join(distPath, "index.html"));
   });
 }

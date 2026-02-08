@@ -31,7 +31,8 @@ export async function setupVite(server: Server, app: Express) {
 
   app.use(vite.middlewares);
 
-  app.get("*", async (req, res, next) => {
+  // Express 5 compatible catch-all route
+  app.use(async (req, res, next) => {
     const url = req.originalUrl;
 
     try {
