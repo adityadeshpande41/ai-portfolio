@@ -14,7 +14,6 @@ vite.config.ts.*
 *.pdf
 *.HEIC
 *.heic
-Travel*.jpg
 IMG_*.jpg
 IMG_*.JPG
 
