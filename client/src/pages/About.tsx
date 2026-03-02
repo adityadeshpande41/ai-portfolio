@@ -103,13 +103,13 @@ export default function About() {
             <h3 className="text-2xl font-bold text-white mb-6">Education</h3>
             <div className="space-y-4">
               <EducationCard 
-                logo="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/New_York_University_Seal.svg/200px-New_York_University_Seal.svg.png"
+                logo="/images/NYU.png"
                 school="New York University"
                 degree="Master of Science in Information Systems"
                 period="09/2023 - 05/2025"
               />
               <EducationCard 
-                logo="https://upload.wikimedia.org/wikipedia/en/thumb/0/0f/University_of_Mumbai_coat_of_arms.svg/200px-University_of_Mumbai_coat_of_arms.svg.png"
+                logo="/images/University of Mumbai.jpeg"
                 school="University of Mumbai"
                 degree="Bachelor of Technology in Mechanical Engineering"
                 period="09/2019 - 05/2023"
