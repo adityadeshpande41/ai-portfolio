@@ -18,6 +18,7 @@ import VoiceAgent from "@/pages/VoiceAgent";
 import Travel from "@/pages/Travel";
 import Photography from "@/pages/Photography";
 import Hiking from "@/pages/Hiking";
+import Testimonials from "@/pages/Testimonials";
 
 import { Navigation } from "@/components/Navigation";
 import { Cursor } from "@/components/Cursor";
@@ -34,6 +35,7 @@ function Router() {
         <Route path="/experience" component={Experience} />
         <Route path="/projects" component={Projects} />
         <Route path="/writing" component={Writing} />
+        <Route path="/testimonials" component={Testimonials} />
         <Route path="/contact" component={Contact} />
         <Route path="/chat" component={Chat} />
         <Route path="/teardowns" component={ProductTeardowns} />
