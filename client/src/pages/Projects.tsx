@@ -6,6 +6,16 @@ import { useState } from "react";
 const projects = [
   {
     id: 1,
+    title: "SahAI - AI Health Companion",
+    category: "AI",
+    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=1000&auto=format&fit=crop",
+    description: "Voice-first AI health companion with multi-agent architecture. Features intelligent medication tracking, meal analysis, vital monitoring, and caregiver portal. Supports 20+ languages with ElevenLabs voice synthesis.",
+    stack: ["React", "TypeScript", "OpenAI GPT-4", "ElevenLabs", "Multi-Agent AI", "PostgreSQL"],
+    github: "https://github.com/adityadeshpande41/SahAI",
+    demo: "https://sahai-5vxl.onrender.com/"
+  },
+  {
+    id: 2,
     title: "AI Call Assistant",
     category: "AI",
     image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1000&auto=format&fit=crop",
@@ -15,7 +25,7 @@ const projects = [
     demo: null
   },
   {
-    id: 2,
+    id: 3,
     title: "Finance AI Agent",
     category: "AI",
     image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=1000&auto=format&fit=crop",
@@ -25,7 +35,7 @@ const projects = [
     demo: null
   },
   {
-    id: 3,
+    id: 4,
     title: "AI Query Tool",
     category: "AI",
     image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1000&auto=format&fit=crop",
@@ -35,17 +45,17 @@ const projects = [
     demo: null
   },
   {
-    id: 4,
+    id: 5,
     title: "MultiAgent AI Wellness System",
     category: "AI",
-    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=1000&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=1000&auto=format&fit=crop",
     description: "A comprehensive multi-agent AI system designed for wellness and health monitoring. Uses multiple AI agents working collaboratively to provide personalized health recommendations.",
     stack: ["Python", "Multi-Agent Systems", "LangGraph", "Healthcare AI"],
     github: "https://github.com/adityadeshpande41/MultiAgent-AI-Wellness-System",
     demo: null
   },
   {
-    id: 5,
+    id: 6,
     title: "Market Cap PPT Generator",
     category: "Automation",
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop",
@@ -55,7 +65,7 @@ const projects = [
     demo: null
   },
   {
-    id: 6,
+    id: 7,
     title: "A/B Testing Framework",
     category: "Data Science",
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000&auto=format&fit=crop",
@@ -65,7 +75,7 @@ const projects = [
     demo: null
   },
   {
-    id: 7,
+    id: 8,
     title: "Marketing Strategy Analytics",
     category: "Data Science",
     image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=1000&auto=format&fit=crop",
@@ -75,7 +85,7 @@ const projects = [
     demo: null
   },
   {
-    id: 8,
+    id: 9,
     title: "Uber Eats Data Analysis",
     category: "Data Science",
     image: "https://images.unsplash.com/photo-1526367790999-0150786686a2?q=80&w=1000&auto=format&fit=crop",
@@ -85,7 +95,7 @@ const projects = [
     demo: null
   },
   {
-    id: 9,
+    id: 10,
     title: "Olympics Data Analysis",
     category: "Data Science",
     image: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?q=80&w=1000&auto=format&fit=crop",
@@ -95,7 +105,7 @@ const projects = [
     demo: null
   },
   {
-    id: 10,
+    id: 11,
     title: "AI Portfolio Website",
     category: "Web",
     image: "https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=1000&auto=format&fit=crop",
