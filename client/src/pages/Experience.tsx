@@ -1,6 +1,5 @@
 import { PageTransition } from "@/components/PageTransition";
 import { motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
 
 const experiences = [
   {
@@ -71,65 +70,22 @@ const experiences = [
 ];
 
 export default function Experience() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!containerRef.current) return;
-      
-      const container = containerRef.current;
-      const rect = container.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      
-      // Calculate how much of the container has been scrolled through
-      // Progress starts at 0 when container top is at bottom of viewport
-      // Progress reaches 1 when container bottom is at top of viewport
-      const scrollStart = windowHeight - rect.top;
-      const scrollRange = windowHeight + rect.height;
-      
-      const progress = Math.max(0, Math.min(1, scrollStart / scrollRange));
-      setScrollProgress(progress);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Initial calculation
-    
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   return (
     <PageTransition>
       <div className="max-w-3xl mx-auto">
         <h1 className="text-4xl md:text-6xl font-display font-bold mb-16 text-white text-center">Experience</h1>
         
-        <div ref={containerRef} className="relative border-l border-zinc-800 pl-8 md:pl-16 space-y-16 pb-16">
-          {/* Animated Blue Line */}
-          <div 
-            className="absolute left-0 top-0 w-[2px] bg-gradient-to-b from-blue-500 via-blue-400 to-blue-500 transition-all duration-300 ease-out"
-            style={{ 
-              height: `${scrollProgress * 100}%`,
-              transformOrigin: 'top'
-            }}
-          />
-          
+        <div className="relative border-l border-zinc-800 pl-8 md:pl-16 space-y-16">
           {experiences.map((item, idx) => (
             <motion.div 
               key={idx}
               initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.5 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: idx * 0.1 }}
               className="relative"
             >
               {/* Timeline Dot */}
-              <motion.div 
-                className="absolute -left-[41px] md:-left-[73px] top-1 w-5 h-5 rounded-full bg-zinc-950 border-4"
-                initial={{ borderColor: "#27272a" }}
-                whileInView={{ borderColor: "#3b82f6" }}
-                viewport={{ once: false, amount: 0.5 }}
-                transition={{ duration: 0.3 }}
-              />
+              <div className="absolute -left-[41px] md:-left-[73px] top-1 w-5 h-5 rounded-full bg-zinc-950 border-4 border-zinc-800" />
               
               <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-4 gap-4">
                 <div className="flex items-start gap-4">
