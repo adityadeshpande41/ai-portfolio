@@ -1,5 +1,6 @@
 import { PageTransition } from "@/components/PageTransition";
-import { motion } from "framer-motion";
+import { motion, useScroll, useSpring } from "framer-motion";
+import { useRef } from "react";
 
 const experiences = [
   {
@@ -70,12 +71,30 @@ const experiences = [
 ];
 
 export default function Experience() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start center", "end center"]
+  });
+  
+  const scaleY = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
   return (
     <PageTransition>
       <div className="max-w-3xl mx-auto">
         <h1 className="text-4xl md:text-6xl font-display font-bold mb-16 text-white text-center">Experience</h1>
         
-        <div className="relative border-l border-zinc-800 pl-8 md:pl-16 space-y-16">
+        <div ref={containerRef} className="relative border-l border-zinc-800 pl-8 md:pl-16 space-y-16">
+          {/* Animated Blue Line */}
+          <motion.div 
+            className="absolute left-0 top-0 w-[1px] bg-gradient-to-b from-blue-500 via-blue-400 to-blue-500 origin-top"
+            style={{ scaleY, transformOrigin: "top" }}
+          />
+          
           {experiences.map((item, idx) => (
             <motion.div 
               key={idx}
@@ -85,7 +104,12 @@ export default function Experience() {
               className="relative"
             >
               {/* Timeline Dot */}
-              <div className="absolute -left-[41px] md:-left-[73px] top-1 w-5 h-5 rounded-full bg-zinc-950 border-4 border-zinc-800" />
+              <motion.div 
+                className="absolute -left-[41px] md:-left-[73px] top-1 w-5 h-5 rounded-full bg-zinc-950 border-4 transition-colors duration-300"
+                style={{
+                  borderColor: scrollYProgress.get() > (idx / experiences.length) ? "#3b82f6" : "#27272a"
+                }}
+              />
               
               <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-4 gap-4">
                 <div className="flex items-start gap-4">
