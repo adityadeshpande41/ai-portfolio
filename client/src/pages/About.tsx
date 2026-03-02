@@ -92,6 +92,30 @@ export default function About() {
              <StatCard number="5+" label="Companies" />
              <StatCard number="10+" label="Projects" />
           </div>
+
+          {/* Education Section */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.6 }}
+            className="mt-8"
+          >
+            <h3 className="text-2xl font-bold text-white mb-6">Education</h3>
+            <div className="space-y-4">
+              <EducationCard 
+                logo="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/New_York_University_Seal.svg/200px-New_York_University_Seal.svg.png"
+                school="New York University"
+                degree="Master of Science in Information Systems"
+                period="09/2023 - 05/2025"
+              />
+              <EducationCard 
+                logo="https://upload.wikimedia.org/wikipedia/en/thumb/0/0f/University_of_Mumbai_coat_of_arms.svg/200px-University_of_Mumbai_coat_of_arms.svg.png"
+                school="University of Mumbai"
+                degree="Bachelor of Technology in Mechanical Engineering"
+                period="09/2019 - 05/2023"
+              />
+            </div>
+          </motion.div>
         </div>
       </div>
 
@@ -171,6 +195,21 @@ function StatCard({ number, label }: { number: string, label: string }) {
     <div className="p-6 rounded-2xl bg-zinc-900/50 border border-white/5">
       <h4 className="text-3xl font-display font-bold text-white mb-1">{number}</h4>
       <p className="text-sm text-zinc-500 uppercase tracking-wider font-medium">{label}</p>
+    </div>
+  );
+}
+
+function EducationCard({ logo, school, degree, period }: { logo: string, school: string, degree: string, period: string }) {
+  return (
+    <div className="flex items-start gap-4 p-5 rounded-2xl bg-zinc-900/30 border border-zinc-800/50 hover:border-zinc-700/50 transition-all">
+      <div className="w-14 h-14 rounded-xl bg-white p-2 flex items-center justify-center flex-shrink-0">
+        <img src={logo} alt={school} className="w-full h-full object-contain" />
+      </div>
+      <div className="flex-1 min-w-0">
+        <h4 className="text-lg font-bold text-white mb-1">{school}</h4>
+        <p className="text-sm text-zinc-400 mb-1">{degree}</p>
+        <p className="text-xs text-zinc-500">{period}</p>
+      </div>
     </div>
   );
 }
