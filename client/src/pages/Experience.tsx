@@ -82,17 +82,13 @@ export default function Experience() {
       const rect = container.getBoundingClientRect();
       const windowHeight = window.innerHeight;
       
-      // Calculate progress based on container position
-      const containerTop = rect.top;
-      const containerHeight = rect.height;
+      // Calculate how much of the container has been scrolled through
+      // Progress starts at 0 when container top is at bottom of viewport
+      // Progress reaches 1 when container bottom is at top of viewport
+      const scrollStart = windowHeight - rect.top;
+      const scrollRange = windowHeight + rect.height;
       
-      // Start when container enters viewport, end when it leaves
-      const start = windowHeight;
-      const end = -containerHeight;
-      const range = start - end;
-      const current = start - containerTop;
-      
-      const progress = Math.max(0, Math.min(1, current / range));
+      const progress = Math.max(0, Math.min(1, scrollStart / scrollRange));
       setScrollProgress(progress);
     };
 
