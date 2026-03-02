@@ -74,7 +74,7 @@ export default function Experience() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start center", "end center"]
+    offset: ["start 20%", "end 80%"]
   });
   
   const scaleY = useSpring(scrollYProgress, {
@@ -91,24 +91,26 @@ export default function Experience() {
         <div ref={containerRef} className="relative border-l border-zinc-800 pl-8 md:pl-16 space-y-16">
           {/* Animated Blue Line */}
           <motion.div 
-            className="absolute left-0 top-0 w-[1px] bg-gradient-to-b from-blue-500 via-blue-400 to-blue-500 origin-top"
-            style={{ scaleY, transformOrigin: "top" }}
+            className="absolute left-0 top-0 bottom-0 w-[2px] bg-gradient-to-b from-blue-500 via-blue-400 to-blue-500 origin-top"
+            style={{ scaleY }}
           />
           
           {experiences.map((item, idx) => (
             <motion.div 
               key={idx}
               initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: idx * 0.1 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.5 }}
               className="relative"
             >
               {/* Timeline Dot */}
               <motion.div 
-                className="absolute -left-[41px] md:-left-[73px] top-1 w-5 h-5 rounded-full bg-zinc-950 border-4 transition-colors duration-300"
-                style={{
-                  borderColor: scrollYProgress.get() > (idx / experiences.length) ? "#3b82f6" : "#27272a"
-                }}
+                className="absolute -left-[41px] md:-left-[73px] top-1 w-5 h-5 rounded-full bg-zinc-950 border-4"
+                initial={{ borderColor: "#27272a" }}
+                whileInView={{ borderColor: "#3b82f6" }}
+                viewport={{ once: false, margin: "-100px" }}
+                transition={{ duration: 0.3 }}
               />
               
               <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-4 gap-4">
