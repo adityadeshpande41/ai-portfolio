@@ -10,8 +10,8 @@ const testimonials = [
     company: "Sepal AI",
     date: "February 10, 2026",
     relationship: "Robi managed Aditya directly",
-    image: "https://ui-avatars.com/api/?name=Robi+Lin&size=200&background=0ea5e9&color=fff",
-    linkedin: "https://www.linkedin.com/in/robilin/",
+    image: "/images/Robi.jpeg",
+    linkedin: "https://www.linkedin.com/in/robert-lin1/",
     text: "I worked closely with Aditya Deshpande during his time as a Lead AI Engineer at Sepal AI, and he was one of our strongest contributors across engineering and client-facing work.\n\nAditya led a team of data scientists while building and scaling production-grade AI evaluation systems. He worked closely on our LLM evaluation product and brought expertise in agentic workflows. He consistently demonstrated strong technical judgment and the ability to translate complex research ideas into stable, usable systems that performed reliably in real-world environments.\n\nWhat set Aditya apart was his ownership mindset and communication skills. He worked directly with clients to understand requirements, explain technical tradeoffs, and deliver meaningful outcomes. He thrived in fast-moving, ambiguous environments and collaborated seamlessly across product, engineering, and client stakeholders.\n\nI strongly recommend Aditya for AI engineering or applied AI roles that require deep technical expertise, leadership, and strong ownership. He would be a valuable asset to any team building production AI systems."
   },
   {
@@ -21,8 +21,8 @@ const testimonials = [
     company: "Sqor AI",
     date: "November 12, 2025",
     relationship: "Aleksandar managed Aditya directly",
-    image: "https://ui-avatars.com/api/?name=Aleksandar+Nikolov&size=200&background=0ea5e9&color=fff",
-    linkedin: "https://www.linkedin.com/in/aleksandar-nikolov/",
+    image: "/images/Aleksandar.jpeg",
+    linkedin: "https://www.linkedin.com/in/aleksandarmnikolov/",
     text: "I've had the pleasure of working with Aditya here at Sqor AI, where he's been an integral part of our team since joining right after completing his master's. From the very beginning, Aditya has shown exceptional curiosity and dedication to learning, especially in the areas of AI, ML, and data systems.\n\nHis ability to pick up complex concepts quickly and apply them to real-world challenges has been remarkable. Aditya has contributed to several of our key AI and data initiatives, and his technical depth combined with a strong sense of ownership has made a real impact on the team.\n\nHe's proactive, driven, and always eager to explore new ideas, qualities that make him a valuable asset to any organization. I'm confident that wherever his career takes him next, Aditya will continue to excel and create meaningful impact."
   },
   {
@@ -32,8 +32,8 @@ const testimonials = [
     company: "Covenant House New Jersey",
     date: "September 25, 2025",
     relationship: "Cyndia managed Aditya directly",
-    image: "https://ui-avatars.com/api/?name=Cyndia+Green&size=200&background=0ea5e9&color=fff",
-    linkedin: "https://www.linkedin.com/in/cyndiagreen/",
+    image: "/images/Cyndia.jpeg",
+    linkedin: "https://www.linkedin.com/in/cyndia-green-7158a4201/",
     text: "I had the great pleasure of supervising Aditya as the Data Science and ML Lead at Covenant House New Jersey. Aditya brought a powerful blend of ML expertise as we worked on implementing AI into the social justice sector here at CHNJ. He not only improved my own understanding of how to ML can be used in homelessness research, he consistently went above and beyond to optimize the systems we have at Covenant House.\n\nAdditionally, I had to chance to see how Aditya approaches ML in research and data analysis; his writing and strong team player skills made him an invaluable asset to our team. I am very excited to see how his career progresses with these skills and wholeheartedly recommend Aditya!"
   },
   {
@@ -43,8 +43,8 @@ const testimonials = [
     company: "NYU Stern",
     date: "June 21, 2025",
     relationship: "Wei managed Aditya directly",
-    image: "https://ui-avatars.com/api/?name=Wei+Ke&size=200&background=0ea5e9&color=fff",
-    linkedin: "https://www.linkedin.com/in/wei-ke/",
+    image: "/images/Wei.jpeg",
+    linkedin: "https://www.linkedin.com/in/weike1/",
     text: "I had the pleasure of working with Aditya as a TA for my pricing course at Stern, and I was consistently impressed by his growth, responsiveness, and professionalism. Pricing as a topic was relatively new to Aditya, but he picked up the core concepts quickly and was able to help the students with their questions along the way.\n\nAditya was always quick to respond to requests, proactive in offering support, and consistently kept things moving smoothly behind the scenes. His ability to learn fast and contribute meaningfully made him a valuable part of the course team. I'm confident he'll bring the same level of curiosity, diligence, and responsiveness to any future role."
   },
   {
@@ -54,8 +54,8 @@ const testimonials = [
     company: "NYU Stern",
     date: "July 4, 2024",
     relationship: "Chris managed Aditya directly",
-    image: "https://ui-avatars.com/api/?name=Chris+Volinsky&size=200&background=0ea5e9&color=fff",
-    linkedin: "https://www.linkedin.com/in/chrisvolinsky/",
+    image: "/images/Chris.jpeg",
+    linkedin: "https://www.linkedin.com/in/chris-volinsky/",
     text: "Aditya has been a Teaching Assistant for me for the last year at NYU Stern. I have found Aditya to be a hard-working student, happy to jump in and help with anything, and often offering to do whatever is needed to help make our classes better. I have found him to be a strong data scientist and good coder.\n\nHe is friendly and helpful, and gets high marks from the students he works with."
   }
 ];
