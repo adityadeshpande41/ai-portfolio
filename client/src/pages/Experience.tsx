@@ -1,6 +1,6 @@
 import { PageTransition } from "@/components/PageTransition";
-import { motion, useScroll, useSpring } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 
 const experiences = [
   {
@@ -72,16 +72,35 @@ const experiences = [
 
 export default function Experience() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  });
-  
-  const scaleY = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
-  });
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!containerRef.current) return;
+      
+      const container = containerRef.current;
+      const rect = container.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      
+      // Calculate progress based on container position
+      const containerTop = rect.top;
+      const containerHeight = rect.height;
+      
+      // Start when container enters viewport, end when it leaves
+      const start = windowHeight;
+      const end = -containerHeight;
+      const range = start - end;
+      const current = start - containerTop;
+      
+      const progress = Math.max(0, Math.min(1, current / range));
+      setScrollProgress(progress);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Initial calculation
+    
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <PageTransition>
@@ -89,10 +108,13 @@ export default function Experience() {
         <h1 className="text-4xl md:text-6xl font-display font-bold mb-16 text-white text-center">Experience</h1>
         
         <div ref={containerRef} className="relative border-l border-zinc-800 pl-8 md:pl-16 space-y-16 pb-16">
-          {/* Animated Blue Line - extends full height */}
-          <motion.div 
-            className="absolute left-0 top-0 h-full w-[2px] bg-gradient-to-b from-blue-500 via-blue-400 to-blue-500 origin-top"
-            style={{ scaleY }}
+          {/* Animated Blue Line */}
+          <div 
+            className="absolute left-0 top-0 w-[2px] bg-gradient-to-b from-blue-500 via-blue-400 to-blue-500 transition-all duration-300 ease-out"
+            style={{ 
+              height: `${scrollProgress * 100}%`,
+              transformOrigin: 'top'
+            }}
           />
           
           {experiences.map((item, idx) => (
