@@ -74,7 +74,7 @@ export default function Experience() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start 20%", "end 80%"]
+    offset: ["start 30%", "end 70%"]
   });
   
   const scaleY = useSpring(scrollYProgress, {
@@ -88,10 +88,10 @@ export default function Experience() {
       <div className="max-w-3xl mx-auto">
         <h1 className="text-4xl md:text-6xl font-display font-bold mb-16 text-white text-center">Experience</h1>
         
-        <div ref={containerRef} className="relative border-l border-zinc-800 pl-8 md:pl-16 space-y-16">
-          {/* Animated Blue Line */}
+        <div ref={containerRef} className="relative border-l border-zinc-800 pl-8 md:pl-16 space-y-16 pb-16">
+          {/* Animated Blue Line - extends full height */}
           <motion.div 
-            className="absolute left-0 top-0 bottom-0 w-[2px] bg-gradient-to-b from-blue-500 via-blue-400 to-blue-500 origin-top"
+            className="absolute left-0 top-0 h-full w-[2px] bg-gradient-to-b from-blue-500 via-blue-400 to-blue-500 origin-top"
             style={{ scaleY }}
           />
           
@@ -109,7 +109,7 @@ export default function Experience() {
                 className="absolute -left-[41px] md:-left-[73px] top-1 w-5 h-5 rounded-full bg-zinc-950 border-4"
                 initial={{ borderColor: "#27272a" }}
                 whileInView={{ borderColor: "#3b82f6" }}
-                viewport={{ once: false, margin: "-100px" }}
+                viewport={{ once: false, margin: "-50px" }}
                 transition={{ duration: 0.3 }}
               />
               
