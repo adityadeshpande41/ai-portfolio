@@ -153,16 +153,13 @@ export default function Projects() {
           className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full"
         >
           {filteredProjects.map((project) => (
-            <motion.a
+            <motion.div
               layout
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
               key={project.id}
-              href={project.github || project.demo || "#"}
-              target={project.github || project.demo ? "_blank" : "_self"}
-              rel="noopener noreferrer"
-              className="group relative bg-zinc-900 border border-zinc-800 rounded-3xl overflow-hidden hover:border-zinc-600 transition-all hover:scale-[1.02] cursor-pointer block"
+              className="group relative bg-zinc-900 border border-zinc-800 rounded-3xl overflow-hidden hover:border-zinc-600 transition-all hover:scale-[1.02]"
             >
               <div className="aspect-video overflow-hidden">
                 <img 
@@ -179,14 +176,28 @@ export default function Projects() {
                   </div>
                   <div className="flex gap-2">
                     {project.github && (
-                      <div className="p-2 rounded-full bg-white/10 group-hover:bg-white/20 text-white transition-colors">
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
+                        aria-label="View on GitHub"
+                        onClick={(e) => e.stopPropagation()}
+                      >
                         <Github className="w-4 h-4" />
-                      </div>
+                      </a>
                     )}
                     {project.demo && (
-                      <div className="p-2 rounded-full bg-white/10 group-hover:bg-white/20 text-white transition-colors">
+                      <a
+                        href={project.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
+                        aria-label="View live demo"
+                        onClick={(e) => e.stopPropagation()}
+                      >
                         <ExternalLink className="w-4 h-4" />
-                      </div>
+                      </a>
                     )}
                   </div>
                 </div>
@@ -199,7 +210,7 @@ export default function Projects() {
                   ))}
                 </div>
               </div>
-            </motion.a>
+            </motion.div>
           ))}
         </motion.div>
       </div>
