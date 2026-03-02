@@ -74,7 +74,7 @@ export default function Experience() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start 30%", "end 70%"]
+    offset: ["start end", "end start"]
   });
   
   const scaleY = useSpring(scrollYProgress, {
@@ -109,7 +109,7 @@ export default function Experience() {
                 className="absolute -left-[41px] md:-left-[73px] top-1 w-5 h-5 rounded-full bg-zinc-950 border-4"
                 initial={{ borderColor: "#27272a" }}
                 whileInView={{ borderColor: "#3b82f6" }}
-                viewport={{ once: false, margin: "-50px" }}
+                viewport={{ once: false, amount: 0.5 }}
                 transition={{ duration: 0.3 }}
               />
               
