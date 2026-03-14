@@ -16,6 +16,16 @@ const projects = [
   },
   {
     id: 2,
+    title: "ActionLayer - PM Command Center",
+    category: "AI",
+    image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?q=80&w=1000&auto=format&fit=crop",
+    description: "SaaS PM command center that transforms meeting transcripts into structured decisions, risks, and action items using AI. Features Jira integration, risk drift analysis, and natural language command mode.",
+    stack: ["React", "TypeScript", "OpenAI GPT-4", "Express", "PostgreSQL", "Drizzle ORM"],
+    github: "https://github.com/adityadeshpande41/ActionLayer",
+    demo: "https://actionlayer.onrender.com/"
+  },
+  {
+    id: 3,
     title: "AI Call Assistant",
     category: "AI",
     image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1000&auto=format&fit=crop",
