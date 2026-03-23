@@ -9,22 +9,17 @@ function BubblyText({ children }: { children: string }) {
   return (
     <div className="flex flex-wrap gap-x-[0.3em]">
       {words.map((word, i) => (
-        <span key={i} className="inline-block overflow-hidden py-1">
-          {word.split("").map((char, j) => (
-            <motion.span
-              key={j}
-              className="inline-block hover:text-blue-400 transition-colors"
-              whileHover={{ 
-                y: -15, 
-                scale: 1.4,
-                rotate: Math.random() * 20 - 10,
-                transition: { type: "spring", stiffness: 400, damping: 10 }
-              }}
-            >
-              {char}
-            </motion.span>
-          ))}
-        </span>
+        <motion.span
+          key={i}
+          className="inline-block hover:text-blue-400 transition-colors cursor-default"
+          whileHover={{ 
+            y: -8, 
+            scale: 1.1,
+            transition: { type: "spring", stiffness: 400, damping: 10 }
+          }}
+        >
+          {word}
+        </motion.span>
       ))}
     </div>
   );
