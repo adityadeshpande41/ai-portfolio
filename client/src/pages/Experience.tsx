@@ -74,7 +74,7 @@ export default function Experience() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start center", "end center"]
+    offset: ["start 80%", "end 80%"]
   });
   
   const scaleY = useSpring(scrollYProgress, {
