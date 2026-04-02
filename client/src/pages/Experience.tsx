@@ -1,6 +1,6 @@
 import { PageTransition } from "@/components/PageTransition";
-import { motion, useScroll, useSpring } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 
 const experiences = [
   {
@@ -72,16 +72,23 @@ const experiences = [
 
 export default function Experience() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start 80%", "end 80%"]
-  });
-  
-  const scaleY = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
-  });
+  const [lineHeight, setLineHeight] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      const containerTop = rect.top + window.scrollY;
+      const containerHeight = rect.height;
+      const scrolled = window.scrollY - containerTop + window.innerHeight * 0.3;
+      const progress = Math.max(0, Math.min(1, scrolled / containerHeight));
+      setLineHeight(progress * 100);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <PageTransition>
@@ -90,9 +97,9 @@ export default function Experience() {
         
         <div ref={containerRef} className="relative border-l border-zinc-800 pl-8 md:pl-16 space-y-16">
           {/* Animated Blue Line */}
-          <motion.div 
-            className="absolute left-0 top-0 bottom-0 w-[2px] bg-gradient-to-b from-blue-500 via-blue-400 to-blue-500 origin-top"
-            style={{ scaleY }}
+          <div
+            className="absolute left-0 top-0 w-[2px] bg-gradient-to-b from-blue-500 via-blue-400 to-blue-500 transition-none"
+            style={{ height: `${lineHeight}%` }}
           />
           
           {experiences.map((item, idx) => (
