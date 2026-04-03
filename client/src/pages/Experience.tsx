@@ -78,10 +78,10 @@ export default function Experience() {
     const handleScroll = () => {
       if (!containerRef.current) return;
       const rect = containerRef.current.getBoundingClientRect();
-      const containerTop = rect.top + window.scrollY;
-      const containerHeight = rect.height;
-      const scrolled = window.scrollY - containerTop + window.innerHeight;
-      const progress = Math.max(0, Math.min(1, scrolled / (containerHeight + window.innerHeight)));
+      // How far the top of container is above the middle of the screen
+      const progress = Math.max(0, Math.min(1,
+        (window.innerHeight * 0.5 - rect.top) / rect.height
+      ));
       setLineHeight(progress * 100);
     };
 
