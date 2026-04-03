@@ -78,9 +78,8 @@ export default function Experience() {
     const handleScroll = () => {
       if (!containerRef.current) return;
       const rect = containerRef.current.getBoundingClientRect();
-      // How far the top of container is above the middle of the screen
       const progress = Math.max(0, Math.min(1,
-        (window.innerHeight * 0.5 - rect.top) / rect.height
+        (window.innerHeight * 0.8 - rect.top) / rect.height
       ));
       setLineHeight(progress * 100);
     };
