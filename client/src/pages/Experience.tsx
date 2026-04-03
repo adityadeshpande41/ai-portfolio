@@ -80,8 +80,8 @@ export default function Experience() {
       const rect = containerRef.current.getBoundingClientRect();
       const containerTop = rect.top + window.scrollY;
       const containerHeight = rect.height;
-      const scrolled = window.scrollY - containerTop + window.innerHeight * 0.3;
-      const progress = Math.max(0, Math.min(1, scrolled / containerHeight));
+      const scrolled = window.scrollY - containerTop + window.innerHeight;
+      const progress = Math.max(0, Math.min(1, scrolled / (containerHeight + window.innerHeight)));
       setLineHeight(progress * 100);
     };
 
