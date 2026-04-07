@@ -6,11 +6,8 @@ export function Cursor() {
   const mouseY = useMotionValue(-100);
   const [isHovering, setIsHovering] = useState(false);
 
-  // Main dot - fast spring
   const dotX = useSpring(mouseX, { stiffness: 800, damping: 35, mass: 0.1 });
   const dotY = useSpring(mouseY, { stiffness: 800, damping: 35, mass: 0.1 });
-
-  // Trailing bubble - slow spring
   const trailX = useSpring(mouseX, { stiffness: 150, damping: 15, mass: 0.8 });
   const trailY = useSpring(mouseY, { stiffness: 150, damping: 15, mass: 0.8 });
 
@@ -20,7 +17,11 @@ export function Cursor() {
       mouseY.set(e.clientY - 8);
     };
 
+    // Use pointerover only on document, check once per target change
+    let lastTarget: EventTarget | null = null;
     const onOver = (e: MouseEvent) => {
+      if (e.target === lastTarget) return;
+      lastTarget = e.target;
       const t = e.target as HTMLElement;
       setIsHovering(
         t.tagName === "A" || t.tagName === "BUTTON" ||
@@ -28,11 +29,11 @@ export function Cursor() {
       );
     };
 
-    window.addEventListener("mousemove", onMove);
-    document.addEventListener("mouseover", onOver);
+    window.addEventListener("mousemove", onMove, { passive: true });
+    window.addEventListener("mouseover", onOver, { passive: true });
     return () => {
       window.removeEventListener("mousemove", onMove);
-      document.removeEventListener("mouseover", onOver);
+      window.removeEventListener("mouseover", onOver);
     };
   }, [mouseX, mouseY]);
 
