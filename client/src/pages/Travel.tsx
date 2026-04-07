@@ -1,34 +1,22 @@
 import { PageTransition } from "@/components/PageTransition";
 import { motion } from "framer-motion";
+import { useEffect } from "react";
 
 const travelPhotos = [
-  {
-    id: 1,
-    image: "/images/Travel1.jpg",
-    title: "Adventure Awaits",
-    location: "Exploring the world"
-  },
-  {
-    id: 2,
-    image: "/images/Travel2.jpg",
-    title: "New Horizons",
-    location: "Discovering hidden gems"
-  },
-  {
-    id: 3,
-    image: "/images/Travel3.jpg",
-    title: "Wanderlust",
-    location: "Finding inspiration"
-  },
-  {
-    id: 4,
-    image: "/images/Travel4.jpg",
-    title: "Journey",
-    location: "Creating memories"
-  }
+  { id: 1, image: "/images/Travel1.jpg", title: "Adventure Awaits", location: "Exploring the world" },
+  { id: 2, image: "/images/Travel2.jpg", title: "New Horizons", location: "Discovering hidden gems" },
+  { id: 3, image: "/images/Travel3.jpg", title: "Wanderlust", location: "Finding inspiration" },
+  { id: 4, image: "/images/Travel4.jpg", title: "Journey", location: "Creating memories" },
+  { id: 5, image: "/images/travel_n1.jpg", title: "Golden Hour", location: "Chasing the light" },
+  { id: 6, image: "/images/travel_n2.jpg", title: "Urban Escape", location: "City stories" },
+  { id: 7, image: "/images/travel_n3.jpg", title: "Into the Wild", location: "Off the beaten path" },
 ];
 
 export default function Travel() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <PageTransition>
       <div className="max-w-6xl mx-auto">
