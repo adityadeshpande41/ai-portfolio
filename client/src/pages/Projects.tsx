@@ -158,17 +158,13 @@ export default function Projects() {
         </div>
 
         {/* Grid */}
-        <motion.div 
-          layout
-          className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full"
-        >
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
           {filteredProjects.map((project) => (
             <motion.div
-              layout
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
               key={project.id}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.2 }}
               className="group relative bg-zinc-900 border border-zinc-800 rounded-3xl overflow-hidden hover:border-zinc-600 transition-all hover:scale-[1.02]"
             >
               <div className="aspect-video overflow-hidden">
@@ -222,7 +218,7 @@ export default function Projects() {
               </div>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </PageTransition>
   );
