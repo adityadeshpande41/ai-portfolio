@@ -35,7 +35,7 @@ const projects = [
     demo: null
   },
   {
-    id: 3,
+    id: 4,
     title: "Finance AI Agent",
     category: "AI",
     image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=1000&auto=format&fit=crop",
@@ -44,9 +44,7 @@ const projects = [
     github: "https://github.com/adityadeshpande41/Finance-AI-Agent",
     demo: null
   },
-  {
-    id: 4,
-    title: "AI Query Tool",
+  { id: 5, title: "AI Query Tool",
     category: "AI",
     image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1000&auto=format&fit=crop",
     description: "A powerful query tool that leverages AI to process and analyze complex data queries, providing intelligent insights and automated data retrieval.",
@@ -55,7 +53,7 @@ const projects = [
     demo: null
   },
   {
-    id: 5,
+    id: 6,
     title: "MultiAgent AI Wellness System",
     category: "AI",
     image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=1000&auto=format&fit=crop",
@@ -64,9 +62,7 @@ const projects = [
     github: "https://github.com/adityadeshpande41/MultiAgent-AI-Wellness-System",
     demo: null
   },
-  {
-    id: 6,
-    title: "Market Cap PPT Generator",
+  { id: 7, title: "Market Cap PPT Generator",
     category: "Automation",
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop",
     description: "Automated tool that generates professional PowerPoint presentations with market capitalization data and financial metrics for companies.",
@@ -161,7 +157,7 @@ export default function Projects() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
           {filteredProjects.map((project) => (
             <motion.div
-              key={project.id}
+              key={project.title}
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.2 }}
