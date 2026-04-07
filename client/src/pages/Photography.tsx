@@ -1,34 +1,19 @@
 import { PageTransition } from "@/components/PageTransition";
 import { motion } from "framer-motion";
+import { useEffect } from "react";
 
 const photographyPhotos = [
-  {
-    id: 1,
-    image: "/images/P1.jpg",
-    title: "Light & Shadow",
-    location: "Capturing moments"
-  },
-  {
-    id: 2,
-    image: "/images/P2.jpg",
-    title: "Perspective",
-    location: "Finding beauty"
-  },
-  {
-    id: 3,
-    image: "/images/P3.jpg",
-    title: "Composition",
-    location: "Through the lens"
-  },
-  {
-    id: 4,
-    image: "/images/P4.jpg",
-    title: "Essence",
-    location: "Frozen in time"
-  }
+  { id: 1, image: "/images/P1 copy.jpg", title: "Light & Shadow", location: "Capturing moments" },
+  { id: 2, image: "/images/P2 copy.jpg", title: "Perspective", location: "Finding beauty" },
+  { id: 3, image: "/images/P3 copy.jpg", title: "Composition", location: "Through the lens" },
+  { id: 4, image: "/images/P4 copy.jpg", title: "Essence", location: "Frozen in time" },
+  { id: 5, image: "/images/P5.jpg", title: "Contrast", location: "Shades of life" },
+  { id: 6, image: "/images/P6.jpg", title: "Stillness", location: "A quiet moment" },
 ];
 
 export default function Photography() {
+  useEffect(() => { window.scrollTo(0, 0); }, []);
+
   return (
     <PageTransition>
       <div className="max-w-6xl mx-auto">
@@ -50,8 +35,8 @@ export default function Photography() {
               transition={{ delay: index * 0.1, duration: 0.5 }}
               className="group relative rounded-3xl overflow-hidden border border-white/5 aspect-[4/5] hover:border-blue-500/30 transition-all"
             >
-              <img 
-                src={photo.image} 
+              <img
+                src={photo.image}
                 alt={photo.title}
                 className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-110"
               />
