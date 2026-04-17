@@ -4,16 +4,24 @@ import { useEffect, useRef, useState } from "react";
 
 const experiences = [
   {
+    role: "Member of Technical Staff",
+    company: "Charta Health",
+    location: "New York, NY",
+    logo: "/images/Charta Health.jpg",
+    period: "Apr 2026 – Present",
+    highlights: []
+  },
+  {
     role: "Senior AI Engineer / AI Product Engineer",
     company: "Sepal AI",
     location: "New York, NY",
     logo: "/images/logos/Sepal.png",
-    period: "Nov 2025 – Present",
+    period: "Nov 2025 – Apr 2026",
     highlights: [
-      "Building and deploying LLM evaluation pipelines measuring latency, robustness, and safety to support production model selection.",
-      "Designing and shipping agentic systems (LangGraph + RAG) that improve reliability and consistency of enterprise AI workflows.",
-      "Owning and scaling fine-tuning and retraining workflows (SFT, LoRA) on AWS and Docker, reducing iteration cycles by ~35%.",
-      "Creating and maintaining synthetic and augmented data pipelines to expand edge-case coverage and increase deployment confidence."
+      "Built and deployed LLM evaluation pipelines measuring latency, robustness, and safety to support production model selection.",
+      "Designed and shipped agentic systems (LangGraph + RAG) that improved reliability and consistency of enterprise AI workflows.",
+      "Owned and scaled fine-tuning and retraining workflows (SFT, LoRA) on AWS and Docker, reducing iteration cycles by ~35%.",
+      "Created and maintained synthetic and augmented data pipelines to expand edge-case coverage and increase deployment confidence."
     ]
   },
   {
