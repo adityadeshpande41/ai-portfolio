@@ -9,7 +9,12 @@ const experiences = [
     location: "New York, NY",
     logo: "/images/Charta Health.jpg",
     period: "Apr 2026 – Present",
-    highlights: []
+    highlights: [
+      "Building LLM-powered medical coding systems for clinical documentation review, code prediction, and automation.",
+      "Designing AI pipelines for clinical document understanding, summarization, and medical coding recommendations.",
+      "Creating model evaluation workflows to measure coding accuracy, output reliability, and consistency.",
+      "Developing backend APIs and data pipelines to deploy AI capabilities into client-facing healthcare workflows."
+    ]
   },
   {
     role: "Senior AI Engineer / AI Product Engineer",
