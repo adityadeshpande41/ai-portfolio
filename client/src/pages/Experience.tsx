@@ -4,16 +4,28 @@ import { useEffect, useRef, useState } from "react";
 
 const experiences = [
   {
+    role: "AI Engineer",
+    company: "Ford Motor Company",
+    location: "Dearborn, MI",
+    logo: "/images/Ford.png",
+    period: "Sep 2026 – Present",
+    highlights: [
+      "Building production AI pipelines on Google Cloud for predictive repair across vehicle, diagnostic, and service data.",
+      "Engineering agentic AI workflows for repair investigation and diagnostics, reducing manual analysis effort.",
+      "Developing a dealer-facing AI copilot for repair predictions, vehicle context, and service decision support."
+    ]
+  },
+  {
     role: "Member of Technical Staff",
     company: "Charta Health",
     location: "New York, NY",
     logo: "/images/Charta Health.jpg",
-    period: "Apr 2026 – Present",
+    period: "Apr 2026 – Aug 2026",
     highlights: [
-      "Building LLM-powered medical coding systems for clinical documentation review, code prediction, and automation.",
-      "Designing AI pipelines for clinical document understanding, summarization, and medical coding recommendations.",
-      "Creating model evaluation workflows to measure coding accuracy, output reliability, and consistency.",
-      "Developing backend APIs and data pipelines to deploy AI capabilities into client-facing healthcare workflows."
+      "Built LLM-powered medical coding systems for clinical documentation review, code prediction, and automation.",
+      "Designed AI pipelines for clinical document understanding, summarization, and medical coding recommendations.",
+      "Created model evaluation workflows to measure coding accuracy, output reliability, and consistency.",
+      "Developed backend APIs and data pipelines to deploy AI capabilities into client-facing healthcare workflows."
     ]
   },
   {

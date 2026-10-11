@@ -34,18 +34,40 @@ export const resumeData = [
     and product roles. Experience in high stakes domains including finance, security, and applied research.`
   },
 
-  // Current Role - Sepal AI
+  // Current Role - Ford Motor Company
   {
-    title: "Current Role: Sepal AI",
+    title: "Current Role: Ford Motor Company",
+    source: "experience/ford",
+    category: "experience",
+    content: `Aditya is currently working as an AI Engineer at Ford Motor Company in Dearborn, MI (since September 2026). 
+    Key areas: Building production AI pipelines on Google Cloud for predictive repair across vehicle, diagnostic, and 
+    service data. Engineering agentic AI workflows for repair investigation and diagnostics, reducing manual analysis 
+    effort. Developing a dealer-facing AI copilot for repair predictions, vehicle context, and service decision support.`
+  },
+
+  // Charta Health
+  {
+    title: "Charta Health Experience",
+    source: "experience/charta-health",
+    category: "experience",
+    content: `At Charta Health in New York, NY (April 2026 to August 2026), Aditya worked as a Member of Technical Staff. 
+    Key areas: Built LLM-powered medical coding systems for clinical documentation review, code prediction, and 
+    automation. Designed AI pipelines for clinical document understanding, summarization, and medical coding 
+    recommendations. Created model evaluation workflows to measure coding accuracy, output reliability, and consistency. 
+    Developed backend APIs and data pipelines to deploy AI capabilities into client-facing healthcare workflows.`
+  },
+
+  // Sepal AI
+  {
+    title: "Sepal AI Experience",
     source: "experience/sepal-ai",
     category: "experience",
-    content: `Aditya is currently working at Sepal AI in New York, NY in a senior, cross functional capacity spanning 
-    AI engineering, data, analytics, and product. Key areas: Building and deploying LLM evaluation pipelines covering 
-    latency, robustness, and safety. Designing and operating agentic AI systems using LangGraph and RAG. Owning fine 
-    tuning and retraining workflows including SFT and LoRA. Creating synthetic and augmented data pipelines to improve 
-    edge case coverage. Defining KPIs and analytics models for AI performance and reliability. Supporting product 
-    decisions using metrics, benchmarks, and evaluation data. Reducing iteration cycles and deployment risk by 
-    approximately 35 percent.`
+    content: `At Sepal AI in New York, NY (November 2025 to April 2026), Aditya worked as a Senior AI Engineer / AI 
+    Product Engineer in a cross functional capacity spanning AI engineering, data, analytics, and product. Key areas: 
+    Building and deploying LLM evaluation pipelines covering latency, robustness, and safety. Designing and operating 
+    agentic AI systems using LangGraph and RAG. Owning fine tuning and retraining workflows including SFT and LoRA. 
+    Creating synthetic and augmented data pipelines to improve edge case coverage. Reducing iteration cycles and 
+    deployment risk by approximately 35 percent.`
   },
 
   // Sqor AI
