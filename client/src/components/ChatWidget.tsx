@@ -34,20 +34,15 @@ export function ChatWidget() {
     { label: "📅 Schedule Meeting", url: "https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ3u25G9QKmz_OjzUxgXOaSFbilRs8UDxATLo4LanMh0RNdS3J2LMiKA39f4fjIp_UxKQnri9PRt" }
   ];
 
-  const DEFAULT_RESUME = "https://drive.google.com/file/d/1aOZ9P_2TFIRQjoU4ZjB2kes0P6y4A5y6/view?usp=sharing";
+  const DEFAULT_RESUME = "https://drive.google.com/file/d/1ocXc-gdq_EfWvDPCHK-FSkvfYrvTrPjS/view?usp=sharing";
   
   const resumeMap: { [key: string]: string } = {
-    "ai engineer": "https://drive.google.com/file/d/1iFcssC-MhYAMA5NsgRSYI2SPgNTmy3oY/view?usp=sharing",
-    "ai deployment": "https://drive.google.com/file/d/1TZviSPXfQ-xtFj8G-rk27bDnY-BI4WqR/view?usp=sharing",
-    "analytics engineer": "https://drive.google.com/file/d/1OduwO0cbSCw9q8GoxQNEqz_3wJq9VZ-M/view?usp=sharing",
-    "business analyst": "https://drive.google.com/file/d/1L-fhWloTnOhGlYg5wBLRy9rjAczXGYW8/view?usp=sharing",
-    "business intelligence engineer": "https://drive.google.com/file/d/1ryzRsJXu44Hghvkgvea8iqhkzX7d86zh/view?usp=sharing",
-    "data analyst": "https://drive.google.com/file/d/1_k0QeBnzJlpYF6tqjhRmpLlLlioTXuVS/view?usp=sharing",
-    "data engineer": "https://drive.google.com/file/d/1FC42KmaoDRTA7dWp9w5xQRbzU9_ZkcUA/view?usp=sharing",
-    "data scientist": "https://drive.google.com/file/d/1DrzbTmkwmbBtNQ_11fFAwU9vghbt8C10/view?usp=sharing",
-    "machine learning engineer": "https://drive.google.com/file/d/1aN7gcqNU745jN3tfQNffksIbIxpMoU6-/view?usp=sharing",
-    "product manager": "https://drive.google.com/file/d/1p3MOQHxaGDSXQztj4_MnvjV-2oSZh7Ot/view?usp=sharing",
-    "software engineer": "https://drive.google.com/file/d/1nVogSUKiy-gvnrg34YzRiYRvm9UTJeRm/view?usp=sharing"
+    "ai engineer": "https://drive.google.com/file/d/1ocXc-gdq_EfWvDPCHK-FSkvfYrvTrPjS/view?usp=sharing",
+    "data engineer": "https://drive.google.com/file/d/1734ask-wMrqm5jeIJx7YpQOPoxQ92Gla/view?usp=sharing",
+    "data scientist": "https://drive.google.com/file/d/1-mL6Ha428_e7RHv79m00Lm5v1ogE4vgb/view?usp=sharing",
+    "machine learning engineer": "https://drive.google.com/file/d/15d5QQDcttUOb5_FxadG-gfJDMMgXbm8X/view?usp=sharing",
+    "product manager": "https://drive.google.com/file/d/1bzwiEjf0XMAHsZqa5m8gK-YD_chl1zqk/view?usp=sharing",
+    "software engineer": "https://drive.google.com/file/d/1vg-nJQzaHuKWZnIO7t0-MHyMoeVpH568/view?usp=sharing"
   };
 
   const findResumeUrl = (roleText: string): string | null => {
