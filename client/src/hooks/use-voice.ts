@@ -34,6 +34,16 @@ export function useVoiceAgent() {
   const currentAudio = useRef<HTMLAudioElement | null>(null);
   const chatMutation = useChat();
 
+  // Refs mirror the latest state so the single submit path (invoked from the
+  // speech-recognition onend handler, which is bound once on mount) always
+  // reads current values without going stale.
+  const transcriptRef = useRef("");
+  const messagesRef = useRef(messages);
+  const isSubmittingRef = useRef(false);
+
+  useEffect(() => { transcriptRef.current = transcript; }, [transcript]);
+  useEffect(() => { messagesRef.current = messages; }, [messages]);
+
   const speak = useCallback(async (text: string) => {
     try {
       setIsSpeaking(true);
@@ -80,18 +90,84 @@ export function useVoiceAgent() {
       console.error("Speech synthesis error:", error);
       setIsSpeaking(false);
       currentAudio.current = null;
+      // Re-throw so callers (e.g. the auto-greet) can detect a blocked
+      // autoplay and retry after the user interacts with the page.
+      throw error;
     }
   }, []);
 
-  // Auto-greet on first load - immediate
+  // Auto-greet when the user visits the page.
+  // Browsers block audio autoplay until the user has interacted with the page,
+  // so we try immediately and, if that's blocked, retry on the first interaction.
   useEffect(() => {
-    if (!hasGreeted) {
+    if (hasGreeted) return;
+
+    const GREETING = "Hi! I'm Aditya's AI assistant. Ask me anything about my work, skills, or projects!";
+    let fired = false;
+
+    const fireGreeting = () => {
+      if (fired) return;
+      fired = true;
       setHasGreeted(true);
-      // Greet immediately without delay
-      speak("Hi! I'm Aditya's AI assistant. Ask me anything about my work, skills, or projects!");
+      removeInteractionListeners();
+      void speak(GREETING).catch(() => {});
+    };
+
+    const interactionEvents: (keyof WindowEventMap)[] = ["pointerdown", "keydown", "touchstart"];
+    const onInteraction = () => fireGreeting();
+
+    function removeInteractionListeners() {
+      interactionEvents.forEach((evt) =>
+        window.removeEventListener(evt, onInteraction)
+      );
     }
+
+    // Attempt to greet right away (works if the browser allows autoplay,
+    // e.g. the user already interacted before navigating here).
+    (async () => {
+      try {
+        await speak(GREETING);
+        fired = true;
+        setHasGreeted(true);
+      } catch {
+        // Autoplay was blocked; wait for the first user interaction instead.
+        interactionEvents.forEach((evt) =>
+          window.addEventListener(evt, onInteraction, { once: true })
+        );
+      }
+    })();
+
+    return removeInteractionListeners;
   }, [hasGreeted, speak]);
   
+  // Single source of truth for sending a finished transcript to the chat API.
+  // Guarded by isSubmittingRef so it can never fire twice for the same utterance.
+  const submitTranscript = useCallback(() => {
+    const userMsg = transcriptRef.current.trim();
+    if (!userMsg || isSubmittingRef.current) return;
+
+    isSubmittingRef.current = true;
+    setTranscript("");
+
+    setMessages(prev => [...prev, { role: 'user', content: userMsg }]);
+
+    chatMutation.mutate(
+      {
+        message: userMsg,
+        history: messagesRef.current.slice(-5), // last 5 messages as context
+      },
+      {
+        onSuccess: (data) => {
+          setMessages(prev => [...prev, { role: 'assistant', content: data.answer }]);
+          void speak(data.answer).catch(() => {});
+        },
+        onSettled: () => {
+          isSubmittingRef.current = false;
+        },
+      }
+    );
+  }, [chatMutation, speak]);
+
   // Initialize Speech Recognition
   useEffect(() => {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -113,11 +189,14 @@ export function useVoiceAgent() {
         setIsListening(false);
       };
 
+      // Recognition ends either because the user stopped it or speech paused.
+      // This is the single place we trigger submission.
       recognition.current.onend = () => {
         setIsListening(false);
+        submitTranscript();
       };
     }
-  }, []);
+  }, [submitTranscript]);
 
   const stopSpeaking = useCallback(() => {
     // Stop OpenAI audio
@@ -142,60 +221,11 @@ export function useVoiceAgent() {
     }
   }, []);
 
+  // Just stop recognition. The onend handler is the single place that submits
+  // the transcript, so stopping here can never cause a duplicate request.
   const stopListening = useCallback(() => {
-    if (recognition.current) {
-      recognition.current.stop();
-      setIsListening(false);
-      
-      // If we have a transcript, send it to chat
-      if (transcript.trim()) {
-        const userMsg = transcript;
-        setMessages(prev => [...prev, { role: 'user', content: userMsg }]);
-        
-        // Send to API
-        chatMutation.mutate(
-          { 
-            message: userMsg, 
-            history: messages.slice(-5) // Send last 5 messages as context
-          },
-          {
-            onSuccess: (data) => {
-              setMessages(prev => [...prev, { role: 'assistant', content: data.answer }]);
-              speak(data.answer);
-            }
-          }
-        );
-      }
-    }
-  }, [transcript, messages, chatMutation, speak]);
-
-  // Handle "Enter" logic essentially - when user stops speaking for a bit, maybe auto-submit?
-  // For now, we'll rely on the manual stop or the recognition.onend event to trigger submission logic
-  // But standard behavior for non-continuous is it ends automatically.
-  useEffect(() => {
-    if (!isListening && transcript.trim()) {
-       // This effect triggers when listening stops and we have text. 
-       // We can auto-submit here.
-       const userMsg = transcript;
-       // Clear transcript immediately so we don't re-submit
-       setTranscript(""); 
-       
-       setMessages(prev => [...prev, { role: 'user', content: userMsg }]);
-        
-       chatMutation.mutate(
-          { 
-            message: userMsg, 
-            history: messages.slice(-5) 
-          },
-          {
-            onSuccess: (data) => {
-              setMessages(prev => [...prev, { role: 'assistant', content: data.answer }]);
-              speak(data.answer);
-            }
-          }
-        );
-    }
-  }, [isListening, transcript, messages, chatMutation, speak]);
+    recognition.current?.stop();
+  }, []);
 
   return {
     isListening,
@@ -203,7 +233,7 @@ export function useVoiceAgent() {
     messages,
     isSpeaking,
     startListening,
-    stopListening: () => recognition.current?.stop(),
+    stopListening,
     stopSpeaking,
     isPending: chatMutation.isPending
   };
